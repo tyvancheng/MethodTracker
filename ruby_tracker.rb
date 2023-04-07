@@ -6,7 +6,7 @@ def table_lines(rows)
   max < 10 ? max = 10 : max = max #Defines max length per table
   column_widths = [8,max,max]
   # Print header row
-  puts  "| #{columns.map.with_index { |c, i| i==0 ? c.center(8) :  c.center(max) }.join(" | ")} |"
+  puts  "| #{columns.map.with_index { |c, i| i==0 ? c.ljust(8) :  c.ljust(max) }.join(" | ")} |"
 
   # Print separator row, 
   puts "|-#{column_widths.map { |w| "-" * (w) }.join("-|-")}-|"
