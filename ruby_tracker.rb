@@ -106,14 +106,15 @@
 def table_lines(rows)
   # puts rows
   columns = ["Type", "Method", "Arguments"] ###throws error
-  max = rows.flatten.max {|el| el.length}.length
-  column_widths = [4,max,max]
+  max = rows.flatten.inject {|a,e| e.length > a.length ? a=e : a}.length
+  max < 10 ? max = 10 : max = max
+  column_widths = [8,max,max]
   # puts max
   # Print header row
   puts  "| #{columns.map.with_index { |c, i| i==0 ? c.ljust(8) :  c.ljust(max) }.join(" | ")} |"
 
   # Print separator row, 
-  puts "|-#{column_widths.map { |w| "-" * (w + 2) }.join("-|-")}-|"
+  puts "|-#{column_widths.map { |w| "-" * (w) }.join("-|-")}-|"
 
   # Print data rows
   rows.each do |row|
@@ -161,28 +162,9 @@ Dir.glob('*.rb') do |file|
         rows << ['Instance', method_name, arguments]
       end
     end
-    table_lines(rows)
+    table_lines(rows) if !rows.empty?
   end
 end
-
-
-
-def table_lines(rows)
-  columns = ["Type", "Method", "Arguments"]
-  column_widths = columns.map { |c| [c.length, rows.map { |r| r[columns.index(c)].to_s.length }.max].max }
-
-  # Print header row
-  puts "| #{columns.map.with_index { |c, i| c.ljust(column_widths[i]) }.join(" | ")} |"
-
-  # Print separator row
-  puts "|-#{column_widths.map { |w| "-" * (w + 2) }.join("-|-")}-|"
-
-  # Print data rows
-  rows.each do |row|
-    puts "| #{row.map.with_index { |c, i| c.to_s.ljust(column_widths[i]) }.join(" | ")} |"
-  end
-end
-
 
 
 
