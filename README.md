@@ -5,6 +5,7 @@ Parses through the folder it is dropped in and prints out Ruby methods, Classes,
 2. Make sure the files you want to parse through are eligible by ending it in '.rb'
 3. cd into the folder and enter ruby ruby_tracker.rb
 
-Currently unable to parse through nested folders
+Currently unable to parse through nested folders.
+Might not print error-causing code appropriately.
 
 Happy Coding
